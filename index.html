@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Calcule Seu Buquê</title>
+	<style>
+		body {
+			font: normal 1rem arial;
+			color: rgb(255, 255, 255);
+			text-shadow: 2px 2px 3px rgba(47, 0, 92, 0.541);
+			background-image: linear-gradient(to top, aqua, rgb(191, 136, 243));
+			background-attachment: fixed;
+			text-align: center;
+		}
+
+		h1 {
+			margin-bottom: 10px;
+		}
+
+		.cal {
+			background-color: rgba(39, 55, 73, 0.151);
+			width: 300px;
+			font-size: 1.3rem;
+			box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.247);
+			border-radius: 20px;
+			padding-top: 20px;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			align-items: center;
+			margin: auto;
+		}
+
+		input {
+			display: block;
+			border: none;
+			font-size: 1.5rem;
+			color: purple;
+			font-weight: 500;
+			text-shadow: 1px 1px 1px rgb(51, 0, 71);
+			text-align: center;
+			border-radius: 20px;
+			width: 120px;
+			height: 40px;
+		}
+
+		input#botao {
+			background-color: rgb(152, 82, 218);
+			color: rgb(255, 255, 255);
+			font-size: 1.5rem;
+			width: 200px;
+			height: 50px;
+			border-radius: 30px;
+			border: none;
+			box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.144);
+		}
+
+		input#botao:hover {
+			background-color: rgb(191, 136, 243);
+		}
+
+		.flex {
+			display: flex;
+			align-items: center;
+
+
+		}
+
+		.flex input {
+			width: 25px;
+
+		}
+
+		#res {
+			font-weight: normal;
+			font-size: 1.5rem;
+
+		}
+	</style>
+
+</head>
+
+<body>
+	<h1>Calcule seu Buquê</h1>
+
+	<div class="cal">
+		<label for="bolha">Quatidade de Bolhas</label>
+		<input type="number" name="bolha" id="bolha" min="0">
+		<label for="foil">Quatidade de foils</label>
+		<input type="number" name="foil" id="foil" min="0">
+		<label for="latex">Quantidade de latéx</label>
+		<input type="number" name="latex" id="latex" min="0">
+		<div>
+			<div class="flex">
+				<input type="radio" name="base" id="normal" value="normal">
+				<label for="normal">Base Normal</label>
+			</div>
+			<div class="flex">
+				<input type="radio" name="base" id="organica" value="organica">
+				<label for="organica">Base Orgânica</label>
+			</div>
+			<div class="flex">
+				<input type="checkbox" name="entrega" id="entrega">
+				<label for="entrega">Com entrega</label>
+			</div>
+		</div>
+
+		<input type="button" name="calcular" onclick="calcular()" value="Calcular" id="botao">
+		<p id="res"></p>
+	</div>
+
+
+	<script>
+		function calcular() {
+			var txt0 = document.getElementById('bolha')
+			var txt1 = document.getElementById('foil')
+			var txt2 = document.getElementById('latex')
+			var res = document.getElementById('res')
+			var radio = document.getElementsByName('base')
+			var entrega = document.getElementById('entrega')
+			var bolha = Number(txt0.value) * 85
+			var foil = Number(txt1.value) * 36
+			var latex = Number(txt2.value) * 18
+			var b
+			var e
+			if (entrega.checked == true) {
+				e = 10
+			} else {
+				e = 0
+			}
+			if (radio[0].checked == true) {
+				b = 10
+			} else if (radio[1].checked == true) {
+				b = 15
+			}
+			else { b = 0 }
+
+			var r = bolha + foil + latex + b + e + 28
+			res.innerHTML = `O seu buquê custa ${r.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} reais.`
+		}
+	</script>
+</body>
+<html>
